@@ -1,0 +1,54 @@
+Bucur Ionut-Cristian,313CA
+
+
+Task1.1:#lerp
+	  -primeste un vector de valori ale functiei si un x pentru ca care vrem sa calculam valoarea
+	  -calculam intre ce numere fixe se afla x-ul
+	  -calculam matematic valoarea punctului x folosind ecuatia dreptei intre doua puncte calculate anterior
+
+	#bilerp
+	  -primeste o matrice si coordonatele(img si row) si intoarce valoarea interpolata
+	  -calculam valorile punctelor Q11,Q12,Q21,Q22
+	  -calculam valorile interpolate(folosind lerp) ale lui R1,R2 si P(aka value)
+
+Task1.2.1:#forward_mapping
+	   -transforma imaginea(matricea ei,data ca parametru,nu numele) conform matricea T data de asemenea ca parametru
+	   -calculam valorile diagonalei imaginii pe care le adaugam la calculul coordonatelor noi al fiecarui pixel,apoi scriem pixelul din matricea initiala in cea finala in pozitiile calculate
+	   -in final taiem mariginile negre scotand liniile si coloanele pline de 0
+	   -functia returneaza matricea imaginii,dar o si scrie in fisierul "forward_mapping.png"
+
+          #inverse_mapping
+	   -transforma imaginea(matricea ei,data ca parametru,nu numele) conform matricea T data de asemenea ca parametru
+	   -calculam valorea matricei T^-1 si a diagonalei
+	   -pornim calculul pozitiei pixelilor de la -diag pana la diag,lucru ce ne permite sa nu pierdem niciun pixel in timpul transformarii
+	   -calculam valoarea pixelului in coordonatele aflate mai sus folosind bilerp
+	   -in final taiem mariginile negre scotand liniile si coloanele pline de 0
+	   -functia returneaza matricea imaginii
+	
+	  #asddemo
+	    -functia "demo",numele ales incat sa nu aiba conflicte cu demo din octave
+	    -dureaza cateva minute
+	    -transforma imaginile flapping_duck.png si flapping_bird.png conform urmatoarelor matrice:
+			-Scalare cu 0.4: T=[0.4 0;0 0.4]
+			-Rotire fata de orizontala: T=[cos(pi) -sin(pi);sin(pi) cos(pi)]
+			-Rotatie cu 45 de grade in sens trigonometric: T=[cos(pi/4) -sin(pi/4);sin(pi/4) cos(pi/4)]
+
+
+
+Task1.3:#image_stack
+	  -primeste matricea unei imagini ca parametru si numarul de nivele ale stackului
+	  -baga matricea imaginii pe primul nivel al stackului
+	  -baga in continuare pe fiecare nivel matricea imaginii de pe nivelul anterior mai blurata folosind K
+	  -returneaza stackul
+
+        #trilerp
+	  -primeste stackul si coordonatele(col,row,level)
+	  -calculeaza intre ce nivele se afla nivelul cerut
+	  -interpoleaza folosind lerp punctele din aceelasi coordonate dar de pe nivele diferite
+
+	#transform_image
+	  -primeste matricea unei imagini ca parametru si nivelul cerut ca parametrii
+	  -calculeaza stackul necesar cu numarul minim de nivele(incat nivelul cerut sa fie inclus intre alte doua nivele)
+	  -folosind functia trilerp calculam valorile fiecarui pixel din matricea manjita
+	  -functia returneaza matricea imaginii,dar o si scrie in fisierul "transform_image.png"
+
